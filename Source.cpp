@@ -1,8 +1,8 @@
 #include<iostream>
-#include "Util.h"
-
 #include<cstdlib>
 #include<iomanip>
+
+#include "Util.h"
 
 // m is equal to 1 or 0, represent the probability x value when x is equal to 0 or 1
 // this function will return the message passing by specific function
@@ -13,7 +13,7 @@ void applyMaxProduct(std::vector<std::vector<std::vector<double>>> &prob,
 
 void main()
 {
-	int const		_num = 10000, _cycle = 500; //cyc is the cycle time of sum-product alg.
+	int const		_num = 5000, _cycle = 500; //cyc is the cycle time of sum-product alg.
 	int					_sum_errorCount = 0, _max_errorCount = 0;
 	int					_start = 1, _s, _again;
 	double			_BER = 0.0, _M = 0.0, _S;	// Gaussian noise parameters
@@ -265,7 +265,7 @@ void applySumProduct(std::vector<std::vector<std::vector<double>>> &prob,
 		prob[i][otherValues[0]][0] * prob[i][otherValues[1]][0] * prob[i][otherValues[2]][0];
 
 	prob[i][j][0] = Util::instance()->logsum(prob[i][j][0], x0);
-	prob[i][j][1] = Util::instance()->logsum(prob[i][j][0], x1);
+	prob[i][j][1] = Util::instance()->logsum(prob[i][j][1], x1);
 }
 
 void applyMaxProduct(std::vector<std::vector<std::vector<double>>> &prob,

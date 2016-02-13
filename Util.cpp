@@ -34,6 +34,6 @@ double Util::Xprobability(double S, int m, double Z)
 	else
 		x = (Z + 1); //P(x=1)
 	static const double inv_sqrt_2pi = 0.3989422804014327;
-	double a = x / S;
-	return inv_sqrt_2pi / S * std::exp(-0.5f * a * a);
+	double a = x / std::sqrt(S);
+	return inv_sqrt_2pi / std::sqrt(S) * std::exp(-0.5f * a * a);
 }
