@@ -28,16 +28,7 @@ double Util::logsum(double loga, double logb)
 
 double Util::Xprobability(double S, int m, double Z)
 {
-	// double x;
-	double resultX0 = 1 / (std::exp(-(2 * Z) / S) + 1);
-
-	if (m == 1){
-		return 1 - resultX0;
-	}
-	else {
-		return resultX0;
-	}
-	/*
+	double x;
 	if (m == 0)
 		x = (Z - 1); //P(x=0)
 	else
@@ -45,5 +36,4 @@ double Util::Xprobability(double S, int m, double Z)
 	static const double inv_sqrt_2pi = 0.3989422804014327;
 	double a = x / std::sqrt(S);
 	return inv_sqrt_2pi / std::sqrt(S) * std::exp(-0.5f * a * a);
-	*/
 }
