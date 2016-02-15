@@ -1,16 +1,16 @@
-#include "Util.h"
+#include "util.h"
 
-// initialize the Util instance
-Util* Util::s_instance = NULL;
+Util::Util(){
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    generator  = new std::default_random_engine(seed);
+}
 
 // use gaussian to generate a random number
 double Util::gaussianRN(const double Mean, const double SquareMargin)
 {
-	std::random_device rd;
-	std::mt19937 e2(rd());
-	// create the normal distribution
-	std::normal_distribution<double> dist(Mean, SquareMargin);
-	return dist(e2);
+    // create the normal distribution
+    std::normal_distribution<double> dist(Mean, SquareMargin);
+    return dist(*generator);
 }
 
 double Util::logsum(double loga, double logb)
@@ -22,28 +22,30 @@ double Util::logsum(double loga, double logb)
 	else if (diff<-23)
 		logaplusb = logb;
 	else
-		logaplusb = logb + log(exp(diff) + 1);
+        logaplusb = logb + std::log(std::exp(diff) + 1);
 	return logaplusb;
 }
 
 double Util::Xprobability(double S, int m, double Z)
 {
-	// double x;
-	double resultX0 = 1 / (std::exp(-(2 * Z) / S) + 1);
+    // double x;
+    double resultX0 = 1 / (std::exp(-(2 * Z) / S) + 1);
 
-	if (m == 1){
-		return 1 - resultX0;
-	}
-	else {
-		return resultX0;
-	}
-	/*
+    if (m == 1){
+        return 1 - resultX0;
+    }
+    else {
+        return resultX0;
+    }
+
+    /*
+	double x;
 	if (m == 0)
 		x = (Z - 1); //P(x=0)
 	else
 		x = (Z + 1); //P(x=1)
-	static const double inv_sqrt_2pi = 0.3989422804014327;
-	double a = x / std::sqrt(S);
-	return inv_sqrt_2pi / std::sqrt(S) * std::exp(-0.5f * a * a);
-	*/
+    static const double inv_sqrt_2pi = 0.3989422804014327;
+    double a = x / std::sqrt(S);
+    return inv_sqrt_2pi / std::sqrt(S) * std::exp(-0.5 * a * a);
+    */
 }

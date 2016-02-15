@@ -1,16 +1,20 @@
 #pragma once
 
-
-#include<ctime>
-#include<cmath>
+#include <iostream>
+#include <ctime>
+#include <cmath>
 #include <random>
+#include <chrono>
 
 class Util
 {
-	const double PI = 3.1415926;
-	static Util *s_instance;
-	Util(){};
+private:
+    const double PI = 3.1415926;
+    std::default_random_engine *generator;
+
 public:
+    Util();
+
 	// get the PI value
 	double getPI(){ return PI; }
 
@@ -28,13 +32,5 @@ public:
 	double logsum(double loga, double logb);
 	// get the probability when x is equal to 0 or 1
 	double Xprobability(double SquareMargin, int m, double observedZ);
-
-	// get the Util single instance
-	static Util *instance()
-	{
-		if (!s_instance)
-			s_instance = new Util();
-		return s_instance;
-	}
 };
 
